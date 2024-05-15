@@ -39,7 +39,7 @@ CREATE TABLE ProductInventory (
 );
 --rollback DROP TABLE ProductInventory;
 
---changeset vr labels:"0.0.2"
+--changeset vr:5 labels:"0.0.2"
 CREATE TABLE Users (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     FirstName VARCHAR(255) NOT NULL,
