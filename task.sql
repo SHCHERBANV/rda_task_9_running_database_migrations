@@ -1,6 +1,3 @@
-DROP DATABASE IF EXISTS ShopDB;
-CREATE DATABASE ShopDB;
-
 --liquibase formatted sql
 
 --changeset mate.academy:1 labels:"0.0.1"
@@ -42,17 +39,15 @@ CREATE TABLE ProductInventory (
 );
 --rollback DROP TABLE ProductInventory;
 
---liquibase formatted sql
-
--- changeset mate.academy:5 labels:"0.0.2"
+--changeset vr labels:"0.0.2"
 CREATE TABLE Users (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     FirstName VARCHAR(255) NOT NULL,
     LastName VARCHAR(255) NOT NULL,
-    Email VARCHAR(255) NOT NULL UNIQUE,
+    Email VARCHAR(255) NOT NULL UNIQUE
 );
--- rollback DROP TABLE Users;
+--rollback DROP TABLE Users;
 
--- changeset your_username:6 labels:"0.0.3"
+--changeset vr:6 labels:"0.0.3"
 CREATE INDEX Email ON Users (Email);
--- rollback DROP INDEX Email ON Users;
+--rollback DROP INDEX Email ON Users;
