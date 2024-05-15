@@ -1,6 +1,9 @@
+DROP DATABASE IF EXISTS ShopDB;
+CREATE DATABASE ShopDB;
+
 --liquibase formatted sql
 
---changeset mate.acamemy:1 labels:0.0.1
+--changeset mate.academy:1 labels:"0.0.1"
 CREATE TABLE Countries (
     ID INT,
     Name VARCHAR(50),
@@ -8,7 +11,7 @@ CREATE TABLE Countries (
 );
 --rollback DROP TABLE Countries;
 
---changeset mate.acamemy:2 labels:0.0.1
+--changeset mate.academy:2 labels:"0.0.1"
 CREATE TABLE Products (
     ID INT AUTO_INCREMENT,
     Name VARCHAR(50),
@@ -16,25 +19,40 @@ CREATE TABLE Products (
 );
 --rollback DROP TABLE Products;
 
---changeset mate.acamemy:3 labels:0.0.1
+--changeset mate.academy:3 labels:"0.0.1"
 CREATE TABLE Warehouses (
     ID INT AUTO_INCREMENT,
     Name VARCHAR(50),
     Address VARCHAR(50),
     CountryID INT,
-	FOREIGN KEY (CountryID) REFERENCES Countries(ID) ON DELETE NO ACTION,
+    FOREIGN KEY (CountryID) REFERENCES Countries(ID) ON DELETE NO ACTION,
     PRIMARY KEY (ID)
 );
 --rollback DROP TABLE Warehouses;
 
---changeset mate.acamemy:4 labels:0.0.1
+--changeset mate.academy:4 labels:"0.0.1"
 CREATE TABLE ProductInventory (
-    ID INT,
+    ID INT AUTO_INCREMENT,
     ProductID INT,
-    FOREIGN KEY (ProductID) REFERENCES Products(ID) ON DELETE NO ACTION,
     WarehouseAmount INT,
     WarehouseID INT,
-    FOREIGN KEY (WarehouseID) REFERENCES Warehouses(ID) ON DELETE NO ACTION,
-    PRIMARY KEY (ID)
+    PRIMARY KEY (ID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ID) ON DELETE NO ACTION,
+    FOREIGN KEY (WarehouseID) REFERENCES Warehouses(ID) ON DELETE NO ACTION
 );
 --rollback DROP TABLE ProductInventory;
+
+--liquibase formatted sql
+
+-- changeset mate.academy:5 labels:"0.0.2"
+CREATE TABLE Users (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(255) NOT NULL,
+    LastName VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+);
+-- rollback DROP TABLE Users;
+
+-- changeset your_username:6 labels:"0.0.3"
+CREATE INDEX Email ON Users (Email);
+-- rollback DROP INDEX Email ON Users;
